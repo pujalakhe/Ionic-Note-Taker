@@ -3,10 +3,10 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { IonModal, IonicModule } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
-
-import { Subscription } from 'rxjs';
 import { Note, NoteService } from 'src/app/services/note.service';
-
+import { Subscription } from 'rxjs';
+import { addIcons } from 'ionicons';
+import { addOutline, arrowBackOutline, checkmarkOutline } from 'ionicons/icons';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,11 +21,21 @@ export class HomePage implements OnInit, OnDestroy {
   notes: Note[] = [];
   isOpen: boolean = false;
 
-  constructor(private note: NoteService) {}
+  constructor(private note: NoteService) {
+    addIcons({ addOutline, checkmarkOutline, arrowBackOutline });
+  }
 
   ngOnInit(): void {
-    this.note.getNotes();
-    this.noteSub = this.note.notes.subscribe({
+    // this.note.getNotes();
+    // this.noteSub = this.note.notes.subscribe({
+    //   next: (notes) => {
+    //     this.notes = notes;
+    //   },
+    //   error: (e) => {
+    //     console.log(e);
+    //   }
+    // });
+    this.noteSub = this.note.getRealtimeNotes().subscribe({
       next: (notes) => {
         this.notes = notes;
       },
