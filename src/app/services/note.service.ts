@@ -76,16 +76,16 @@ export class NoteService {
             this.notesArray.push(note);
           } else {
             if (change.type === 'added') {
-              console.log('New city: ', note);
+              console.log('New note: ', note);
               this.notesArray.push(note);
             }
             if (change.type === 'modified') {
-              console.log('Modified city: ', note);
+              console.log('Modified note: ', note);
               const index = this.notesArray.findIndex((x) => x.id == note.id);
               this.notesArray[index] = note;
             }
             if (change.type === 'removed') {
-              console.log('Removed city: ', note);
+              console.log('Removed note: ', note);
               this.notesArray = this.notesArray.filter((x) => x.id != note.id);
             }
           }
